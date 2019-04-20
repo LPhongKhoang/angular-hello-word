@@ -1,12 +1,23 @@
 <h2>My Heroes</h2>
 <ul class="heroes">
   <li *ngFor="let hero of heroes"
-    [class.selected]="hero === selectedHero"
-    routerLink="/detail/{{hero.id}}">
+  routerLink="/detail/{{hero.id}}">
 
-    <span class="badge">{{hero.id}}</span> {{hero.name}}
+    <a><span class="badge">{{hero.id}}</span> {{hero.name}}</a>
+    <button class="delete" title="delete hero" (click)="deleteHero(hero)">&times;</button>
   </li>
 </ul>
+
+<div>
+  <form #formAddHero="ngForm" (ngSubmit)="submit_addHero()">
+    <div class="form-group">
+      <label for="hero-name">Hero name: </label>
+      <input required class="form-control" [(ngModel)]="hero.name" name="hero-name" id="hero-name">
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="formAddHero.invalid">Add</button>
+
+  </form>
+</div>
 
 
 
